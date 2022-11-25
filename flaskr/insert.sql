@@ -25,7 +25,7 @@ INSERT INTO argument (type, content) VALUES
 (1, "Parfois non réversible (peut être un avantage)");
 
 
-INSERT INTO gear_arg (id_gear, id_arg) VALUES
+INSERT INTO gear_arg VALUES
 (1, 1),
 (1, 2),
 (1, 9),
@@ -40,7 +40,7 @@ INSERT INTO gear_arg (id_gear, id_arg) VALUES
 (3, 6),
 (3, 13),
 (3, 16),
-(4, 7 ),
-(4, 8 ),
+(4, 7),
+(4, 8),
 (4, 17),
 (4, 18);
