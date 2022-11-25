@@ -1,4 +1,4 @@
-INSERT INTO grear (name, desc, img) VALUES
+INSERT INTO gear (name, desc, img) VALUES
 ("cylindriques à denture droite", "", "b074cca3f97f8b5d56083c3561aad95c.jpg" ),
 ("cylindriques à denture hélicoïdale", "", "engrenage_hélicoïdale_cannelée_long-768x1024.jpg"),
 ("coniques", "", "pignon_droit_avec_entrée_de_dent-1024x768.jpg"),
