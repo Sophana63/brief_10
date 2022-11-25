@@ -15,3 +15,23 @@ CREATE TABLE post (
   body TEXT NOT NULL,
   FOREIGN KEY (author_id) REFERENCES user (id)
 );
+
+CREATE TABLE gear (
+  id INTEGER(5) PRIMARY KEY AUTOINCREMENT,
+  name VARCHAR(32),
+  desc TEXT,
+  img VARCHAR(64)
+);
+
+CREATE TABLE argument (
+  id INTEGER(5) PRIMARY KEY AUTOINCREMENT,
+  type BOOLEAN,
+  content VARCHAR(32),
+);
+
+CREATE TABLE gear_arg (
+  id_gear INTEGER(5),
+  id_arg INTEGER(5),
+  FOREIGN KEY id_gear REFERENCES gear(id),
+  FOREIGN KEY id_arg REFERENCES argument(id),
+);
