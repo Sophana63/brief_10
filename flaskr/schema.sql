@@ -16,22 +16,22 @@ CREATE TABLE post (
   FOREIGN KEY (author_id) REFERENCES user (id)
 );
 
-CREATE TABLE gear (
-  id INTEGER(5) PRIMARY KEY AUTOINCREMENT,
+CREATE TABLE IF NOT EXISTS gear (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   name VARCHAR(32),
   desc TEXT,
   img VARCHAR(64)
 );
 
-CREATE TABLE argument (
-  id INTEGER(5) PRIMARY KEY AUTOINCREMENT,
+CREATE TABLE IF NOT EXISTS argument (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   type BOOLEAN,
-  content VARCHAR(32),
+  content VARCHAR(32)
 );
 
-CREATE TABLE gear_arg (
+CREATE TABLE IF NOT EXISTS gear_arg (
   id_gear INTEGER(5),
   id_arg INTEGER(5),
-  FOREIGN KEY id_gear REFERENCES gear(id),
-  FOREIGN KEY id_arg REFERENCES argument(id),
+  FOREIGN KEY (id_gear) REFERENCES gear(id),
+  FOREIGN KEY (id_arg) REFERENCES argument(id)
 );
