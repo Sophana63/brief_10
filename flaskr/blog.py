@@ -18,6 +18,22 @@ def index():
     ).fetchall()
     return render_template('blog/index.html', posts=posts)
 
+@bp.route('/gears')
+def gearindex():
+    db = get_db()
+    gears = db.execute(
+        'SELECT id, name, desc, img'
+        ' FROM gear'
+        ' ORDER BY id DESC'
+    ).fetchall()
+    args = db.execute(
+        'SELECT a.id AS id, type, content, g.id AS gid'
+        ' FROM argument a JOIN gear_arg j ON j.id_arg = a.id'
+        ' JOIN gear g ON j.id_gear = g.id'
+        ' ORDER BY a.id DESC'
+    ).fetchall()
+    return render_template('gears/index.html', gears=gears, args=args)
+
 
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
