@@ -6,10 +6,20 @@
 
 {% block content %}
   <form method="post">
-    <label for="title">Title</label>
-    <input name="title" id="title" value="{{ request.form['title'] }}" required>
-    <label for="body">Body</label>
-    <textarea name="body" id="body">{{ request.form['body'] }}</textarea>
-    <input type="submit" value="Save">
+    <div id="blogpost-tipping">
+      <div id="blogpost-align">
+        <label for="title">Title</label>
+        <input name="title" id="title" value="{{ request.form['title'] }}" required>
+      </div>
+      <div id="blogpost-align">
+        <label for="body exampleFormControlTextarea1" class="form-label">Body</label>
+        <textarea class="form-control col-11"name="body" id="body exampleFormControlTextarea1" rows="6">{{ request.form['body'] }}</textarea>
+      </div>
+
+    <label for="exampleColorInput" class="form-label">Color picker</label>
+    <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#563d7c" title="Choose your color">
+    <input type="submit" value="Save" class="btn btn-primary">
+
+    </div>  
   </form>
 {% endblock %}
