@@ -27,4 +27,4 @@ Dans la database flsakr.sql nous créons 5 tables :
 
 Une table de liaison 'gear_arg ' lie gear et argument via gear(id) et argument(id), vous pouvez voir cette liaison via le mcd ci dessous : 
 
-![fig 1 image du MCD](flaskr/rendu/images/schéma db engrenages.png)
+![fig 1 image du MCD](https://github.com/Sophana63/brief_10/blob/Charlie/flaskr/rendu/images/sch%C3%A9ma%20db%20engrenages.png)
