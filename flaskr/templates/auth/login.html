@@ -4,12 +4,21 @@
   <h1>{% block title %}Log In{% endblock %}</h1>
 {% endblock %}
 
+
 {% block content %}
-  <form method="post">
-    <label for="username">Username</label>
-    <input name="username" id="username" required>
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" required>
-    <input type="submit" value="Log In">
-  </form>
+<form>
+  <div class="mb-3">
+    <label for="username" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1, username" name="username" aria-describedby="emailHelp" required>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Password</label>
+    <input type="password" class="form-control" name="password" id="exampleInputPassword1 password" required>
+  </div>
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 {% endblock %}
