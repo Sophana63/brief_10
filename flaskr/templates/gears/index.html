@@ -10,6 +10,15 @@
       <header>
         <div>
           <h1>{{ gear['name'] }}</h1>
+          {% for arg in args %}
+            {% if arg['gid'] == gear['id'] %}
+              {% if arg['type'] %}
+              <div class="about">- {{ arg['content'] }}</div>
+              {% else %}
+              <div class="about">+ {{ arg['content'] }}</div>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
         </div>
       </header>
       <p class="body">{{ gear['desc'] }}</p>

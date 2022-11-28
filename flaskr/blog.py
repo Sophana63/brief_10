@@ -26,7 +26,13 @@ def gearindex():
         ' FROM gear'
         ' ORDER BY id DESC'
     ).fetchall()
-    return render_template('gears/index.html', gears=gears)
+    args = db.execute(
+        'SELECT a.id AS id, type, content, g.id AS gid'
+        ' FROM argument a JOIN gear_arg j ON j.id_arg = a.id'
+        ' JOIN gear g ON j.id_gear = g.id'
+        ' ORDER BY a.id DESC'
+    ).fetchall()
+    return render_template('gears/index.html', gears=gears, args=args)
 
 
 @bp.route('/create', methods=('GET', 'POST'))

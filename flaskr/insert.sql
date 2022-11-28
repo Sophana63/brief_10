@@ -1,8 +1,8 @@
 INSERT INTO gear (name, desc, img) VALUES
-("cylindriques à denture droite", "", "b074cca3f97f8b5d56083c3561aad95c.jpg" ),
-("cylindriques à denture hélicoïdale", "", "engrenage_hélicoïdale_cannelée_long-768x1024.jpg"),
-("coniques", "", "pignon_droit_avec_entrée_de_dent-1024x768.jpg"),
-("roue et vis sans fin", "", "roue_a_vis_en_cours_de-taillage-1024x768.jpg");
+("cylindriques à denture droite", "test 1", "b074cca3f97f8b5d56083c3561aad95c.jpg" ),
+("cylindriques à denture hélicoïdale", "test 2", "engrenage_hélicoïdale_cannelée_long-768x1024.jpg"),
+("coniques", "test 3", "pignon_droit_avec_entrée_de_dent-1024x768.jpg"),
+("roue et vis sans fin", "test 4", "roue_a_vis_en_cours_de-taillage-1024x768.jpg");
 
 INSERT INTO argument (type, content) VALUES
 (0, "Simple et économique"),
