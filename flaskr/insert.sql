@@ -9,7 +9,7 @@ INSERT INTO argument (type, content) VALUES
 (0, "Pas d’efforts axiaux"),
 (0, "Transmission plus souple et moins bruyante"),
 (0, "Transmission d’efforts et de vitesses plus importants"),
-(0,"Possibilités d’entraxes infinis"), 
+(0, "Possibilités d’entraxes infinis"),
 (0, "Possibilité de choisir le sens de rotation de la roue menée"),
 (0, "Arbres quelconques (Très souvent orthogonaux)"),
 (0, "Rapport de réduction élevés"),
