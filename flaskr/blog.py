@@ -30,7 +30,7 @@ def gearindex():
         'SELECT a.id AS id, type, content, g.id AS gid'
         ' FROM argument a JOIN gear_arg j ON j.id_arg = a.id'
         ' JOIN gear g ON j.id_gear = g.id'
-        ' ORDER BY a.id ASC'
+        ' ORDER BY type ASC'
     ).fetchall()
     return render_template('gears/index.html', gears=gears, args=args)
 
