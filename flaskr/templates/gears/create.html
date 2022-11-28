@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}New Post{% endblock %}</h1>
+  <h1>{% block title %}New Gear{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
@@ -10,6 +10,16 @@
     <input name="name" id="name" value="{{ request.form['name'] }}" required>
     <label for="desc">Description</label>
     <textarea name="desc" id="desc">{{ request.form['desc'] }}</textarea>
-    <input type="submit" value="Save">
+    <label class="form-check-label">Positive arguments:</label>
+    {% for arg in argp %}
+      <div class="about">{{ arg['content'] }}</div>
+      <input type="checkbox" class="form-check-input" id="arg{{ arg['id'] }}" value="arg{{ arg['id'] }}">
+    {% endfor %}
+    <label class="form-check-label">Negative arguments:</label>
+    {% for arg in argn %}
+      <div class="about">{{ arg['content'] }}</div>
+      <input type="checkbox" class="form-check-input" id="arg{{ arg['id'] }}" value="arg{{ arg['id'] }}">
+    {% endfor %}
+    <input type="submit" class="btn btn-primary" value="Save">
   </form>
 {% endblock %}
