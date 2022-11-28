@@ -1,18 +1,46 @@
 <!doctype html>
 <title>{% block title %}{% endblock %} - Flaskr</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<nav>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
   <h1>Flaskr</h1>
-  <ul>
+  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Engrenage
+      </a>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="{{ url_for('blog.gearindex') }}">Liste</a></li>
+        <li><a class="dropdown-item" href="#">Ajouter</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="#">Modifier</a></li>
+      </ul>
+    </li>
+
     {% if g.user %}
       <li><span>{{ g.user['username'] }}</span>
-      <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
+      <li class="nav-item"><a href="{{ url_for('auth.logout') }}" class="nav-link">Log Out</a>
     {% else %}
-      <li><a href="{{ url_for('auth.register') }}">Register</a>
-      <li><a href="{{ url_for('auth.login') }}">Log In</a>
+      <li class="nav-item"><a href="{{ url_for('auth.register') }}" class="nav-link">Register</a>
+      <li class="nav-item"><a href="{{ url_for('auth.login') }}" class="nav-link">Log In</a>
     {% endif %}
   </ul>
+  <form class="d-flex" role="search">
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+  </form>
+</div>
+</div>
 </nav>
+
+
 <section class="content">
   <header>
     {% block header %}{% endblock %}
@@ -22,3 +50,4 @@
   {% endfor %}
   {% block content %}{% endblock %}
 </section>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
