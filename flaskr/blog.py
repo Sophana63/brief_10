@@ -34,6 +34,31 @@ def gearindex():
     ).fetchall()
     return render_template('gears/index.html', gears=gears, args=args)
 
+@bp.route('/gears/create', methods=('GET', 'POST'))
+@login_required
+def gearcreate():
+    if request.method == 'POST':
+        name = request.form['name']
+        desc = request.form['desc']
+        error = None
+
+        if not name:
+            error = 'Name is required.'
+
+        if error is not None:
+            flash(error)
+        else:
+            db = get_db()
+            db.execute(
+                'INSERT INTO gear (name, desc, img)'
+                ' VALUES (?, ?, "none")',
+                (name, desc,)
+            )
+            db.commit()
+            return redirect(url_for('blog.gearindex'))
+
+    return render_template('gears/create.html')
+
 
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
