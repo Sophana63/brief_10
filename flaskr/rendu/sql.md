@@ -7,7 +7,7 @@ Dans la database flsakr.sql nous créons 5 tables :
 
 -post, contient :
     .les id sous forme d'INTEGER PRIMARY KEY AUTOINCREMENT,
-    .les author_id sous forme d'INTEGER NOT NULL en tant que clé étrangère, il correspondent aux id de la table user(cf*),
+    .les author_id sous forme d'INTEGER NOT NULL en tant que clé étrangère, ils correspondent aux id de la table user(cf*),
     ."created" correspond à la date de création de l'article sous forme de TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     . les title sous forme de TEXT NOT NULL,
     . le corps de texte (=body) sous forme de TEXT NOT NULL,
