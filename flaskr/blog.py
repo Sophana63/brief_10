@@ -51,8 +51,8 @@ def gearcreate():
             flash(error)
         else:
             db.execute(
-                'INSERT INTO gear (name, desc, img)'
-                ' VALUES (?, ?, "none")',
+                'INSERT INTO gear (name, desc)'
+                ' VALUES (?, ?)',
                 (name, desc,)
             )
             db.commit()
@@ -83,6 +83,91 @@ def gearcreate():
         ' ORDER BY id ASC'
     ).fetchall()
     return render_template('gears/create.html', argp=argp, argn=argn)
+
+
+def get_gear(id):
+    gear = get_db().execute(
+        'SELECT id, name, desc, img'
+        ' FROM gear'
+        ' WHERE id = ?',
+        (id,)
+    ).fetchone()
+
+    if gear is None:
+        abort(404, f"Gear id {id} doesn't exist.")
+
+    return gear
+
+
+@bp.route('/gears/<int:id>/update', methods=('GET', 'POST'))
+@login_required
+def gearupdate(id):
+    db = get_db()
+    gear = get_gear(id)
+    gearargs = db.execute(
+        'SELECT id_arg'
+        ' FROM gear_arg'
+        ' WHERE id_gear = ?',
+        (id,)
+    ).fetchall()
+
+    if request.method == 'POST':
+        name = request.form['name']
+        desc = request.form['desc']
+        args = request.form.getlist('arg')
+        error = None
+
+        if not name:
+            error = 'Name is required.'
+
+        if error is not None:
+            flash(error)
+        else:
+            db.execute(
+                'UPDATE gear SET name = ?, desc = ?'
+                ' WHERE id = ?',
+                (name, desc, id,)
+            )
+            db.commit()
+            db.execute(
+                'DELETE FROM gear_arg'
+                ' WHERE id_gear = ?',
+                (id,)
+            )
+            for arg in args:
+                db.execute(
+                    'INSERT INTO gear_arg (id_gear, id_arg)'
+                    ' VALUES (?, ?)',
+                    (id, arg,)
+                )
+                db.commit()
+            return redirect(url_for('blog.gearindex'))
+    argp = db.execute(
+        'SELECT id, content'
+        ' FROM argument'
+        ' WHERE type = FALSE'
+        ' ORDER BY id ASC'
+    ).fetchall()
+    argn = db.execute(
+        'SELECT id, content'
+        ' FROM argument'
+        ' WHERE type = TRUE'
+        ' ORDER BY id ASC'
+    ).fetchall()
+    gargs = []
+    for i in range (len(gearargs)):
+        gargs.append(gearargs[i][0])
+    return render_template('gears/update.html', gear=gear, gargs=gargs, argp=argp, argn=argn)
+
+
+@bp.route('/gears/<int:id>/delete', methods=('POST',))
+@login_required
+def geardelete(id):
+    get_gear(id)
+    db = get_db()
+    db.execute('DELETE FROM gear WHERE id = ?', (id,))
+    db.commit()
+    return redirect(url_for('blog.gearindex'))
 
 
 @bp.route('/create', methods=('GET', 'POST'))
