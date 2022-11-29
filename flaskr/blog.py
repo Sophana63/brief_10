@@ -48,7 +48,7 @@ def gearcreate():
         desc = request.form['desc']
         args = request.form.getlist('arg')
         # lié au fichier file
-        UPLOAD_FOLDER = 'C:\\Users\\utilisateur\\brief_11_gears_museum\\brief_10\\flaskr\\static\\images'
+        UPLOAD_FOLDER = './static/images'
         app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
         ALLOWED_EXTENSIONS = set(['img','jpg', 'jpeg', 'png'])
 
