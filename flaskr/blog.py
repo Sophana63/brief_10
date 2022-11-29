@@ -1,13 +1,18 @@
+# ajout de send_form_directory pour les images
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, url_for
+    Blueprint, flash, g, redirect, render_template, request, url_for, send_from_directory, Flask
 )
 from werkzeug.exceptions import abort
 
 from flaskr.auth import login_required
 from flaskr.db import get_db
 
-bp = Blueprint('blog', __name__)
+# ajout de ces modules pour les images
+import os
+from werkzeug.utils import secure_filename
 
+bp = Blueprint('blog', __name__)
+app = Flask(__name__)
 @bp.route('/')
 def index():
     db = get_db()
@@ -42,7 +47,30 @@ def gearcreate():
         name = request.form['name']
         desc = request.form['desc']
         args = request.form.getlist('arg')
+        # lié au fichier file
+        UPLOAD_FOLDER = 'C:\\Users\\utilisateur\\brief_11_gears_museum\\brief_10\\flaskr\\static\\images'
+        app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+        ALLOWED_EXTENSIONS = set(['img','jpg', 'jpeg', 'png'])
+
+        def allowed_file(filename):
+            return '.' in filename and \
+            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
         error = None
+
+        if 'file' not in request.files:
+            print('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit an empty part without filename
+        if file.filename == '':
+            print('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.root_path, app.config['UPLOAD_FOLDER'], filename))
+            # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            # path = os.path.join(app.root_path,'/images',img.filename)
 
         if not name:
             error = 'Name is required.'
@@ -52,8 +80,8 @@ def gearcreate():
         else:
             db.execute(
                 'INSERT INTO gear (name, desc, img)'
-                ' VALUES (?, ?, "none")',
-                (name, desc,)
+                ' VALUES (?, ?, ?)',
+                (name, desc, filename,)
             )
             db.commit()
             gid = db.execute(

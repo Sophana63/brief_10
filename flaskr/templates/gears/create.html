@@ -5,12 +5,18 @@
 {% endblock %}
 
 {% block content %}
-  <form method="post">
+  <form method="post" enctype=multipart/form-data>
     <label for="name">Name</label>
     <input name="name" id="name" value="{{ request.form['name'] }}" required>
     <label for="desc">Description</label>
     <textarea name="desc" id="desc">{{ request.form['desc'] }}</textarea>
     <label class="form-check-label">Positive arguments:</label>
+
+    <div class="mb-3">
+      <label for="file" class="form-label">Ajouter une image</label>
+      <input class="form-control" name="file" type="file" id="file" value="{{request.files['file']}}">
+    </div>
+
     {% for arg in argp %}
       <div class="about">{{ arg['content'] }}</div>
       <input type="checkbox" class="form-check-input" id="arg{{ arg['id'] }}"
