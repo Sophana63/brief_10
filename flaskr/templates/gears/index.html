@@ -29,7 +29,9 @@
       <p class="body">DESCRIPTION:<br>
         <i>{{ gear['desc'] }}</i>
       </p>
-      <a href="#"><img src="{{url_for('static', filename='images/bouton-modifier.png') }}" alt="modifier un engrenage" style="width: 30px;"></a>
+      <a href="{{ url_for('blog.gearupdate', id=gear['id']) }}">
+        <img src="{{url_for('static', filename='images/bouton-modifier.png') }}"
+        alt="modifier un engrenage" style="width: 30px;"></a>
     </div>
   </div>
   
