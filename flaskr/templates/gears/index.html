@@ -27,36 +27,13 @@
       <p class="body">DESCRIPTION:<br>
         <i>{{ gear['desc'] }}</i>
       </p>
-      <a href="#" class="btn btn-primary">Modifier</a>
+      <a href="#" class="btn btn-primary"><img src="{{ }}"></a>
     </div>
   </div>
   
   </div>
   {% endfor %}
 </div>
-
-  {% for gear in gears %}
-    <article class="post">
-      <header>
-        <div>
-          <h1>{{ gear['name'] }}</h1>
-          
-          <img src="{{url_for('static', filename='images/' +  gear['img'] )}}" align="middle" />
-          {% for arg in args %}          
-            {% if arg['gid'] == gear['id'] %}              
-              {% if arg['type'] %}
-              <div class="about">- {{ arg['content'] }}</div>
-              {% else %}
-              <div class="about">+ {{ arg['content'] }}</div>
-              {% endif %}
-            {% endif %}
-          {% endfor %}
-        </div>
-      </header>
-      <p class="body">{{ gear['desc'] }}</p>
-    </article>
-    {% if not loop.last %}
-      <hr>
-    {% endif %}
-  {% endfor %}
+  
+    
 {% endblock %}
