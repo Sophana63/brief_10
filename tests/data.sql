@@ -6,3 +6,16 @@ VALUES
 INSERT INTO post (title, body, author_id, created)
 VALUES
   ('test title', 'test' || x'0a' || 'body', 1, '2018-01-01 00:00:00');
+
+INSERT INTO gear (name, desc, img) VALUES
+("cylindriques à denture droite", "test 1", "b074cca3f97f8b5d56083c3561aad95c.jpg" ),
+("gearTest", "test 2", "engrenage_hélicoïdale_cannelée_long-768x1024.jpg");
+
+INSERT INTO argument (type, content) VALUES
+(1, "Simple et économique"),
+(2, "Pas d’efforts axiaux");
+
+INSERT INTO gear_arg VALUES
+(1, 1),
+(1, 2);
+

@@ -3,10 +3,11 @@ from flask import g, session
 from flaskr.db import get_db
 
 
-def test_add_gear(gear, app):
-    assert gear.get('/gears/create').status_code == 200
-    response = gear.post(
-        '/gears/create', data={'name': 'gearTest', 'desc': 'asdqsdqsd'}
+
+def test_add_gear(client, app):
+    assert client.get('/gears/create').status_code == 302
+    response = client.post(
+        '/gears/create', data={'name': 'gearTest', 'desc': 'asdqsdqsd', 'arg': 1}
     )
     assert response.headers["Location"] == "/auth/login"
 
@@ -16,14 +17,15 @@ def test_add_gear(gear, app):
         ).fetchone() is not None
 
 
-@pytest.mark.parametrize(('name', 'desc', 'message'), (
-    ('', '', b' name is required.'),
-    ('gearTest', '', b' desc is required.'),
-    ('test', 'test', b' ok.'),
+@pytest.mark.parametrize(('name', 'desc', 'arg', 'message'), (
+    ('', '', '', b' name is required.'),
+    ('gearTest', '', '',  b' description is required.'),
+    ('gearTest', 'test', '', b' argument is required.'),
+    ('gearTest', 'test', '1', b' ok.'),
 ))
-def test_register_validate_input(gear, name, desc, message):
-    response = gear.post(
+def test_register_validate_input(client, name, desc, arg, message):
+    response = client.post(
         '/gears/create',
-        data={'name': name, 'desc': desc}
+        data={'name': name, 'desc': desc, 'arg': arg}
     )
     assert message in response.data
