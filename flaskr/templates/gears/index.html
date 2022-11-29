@@ -5,13 +5,45 @@
 {% endblock %}
 
 {% block content %}
+<div class="gears-section">
+  {% for gear in gears %}
+  <div class="gearCard">
+  
+  <div class="card" style="width: 18rem;">
+    <img src="{{url_for('static', filename='images/' +  gear['img'] )}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{ gear['name'] }}</h5>
+      <p class="card-text">
+        {% for arg in args %}          
+          {% if arg['gid'] == gear['id'] %}              
+              {% if arg['type'] %}
+              - {{ arg['content'] }}<br>
+              {% else %}
+              + {{ arg['content'] }}<br>
+              {% endif %}
+          {% endif %}
+        {% endfor %}
+      </p>
+      <p class="body">DESCRIPTION:<br>
+        <i>{{ gear['desc'] }}</i>
+      </p>
+      <a href="#" class="btn btn-primary">Modifier</a>
+    </div>
+  </div>
+  
+  </div>
+  {% endfor %}
+</div>
+
   {% for gear in gears %}
     <article class="post">
       <header>
         <div>
           <h1>{{ gear['name'] }}</h1>
-          {% for arg in args %}
-            {% if arg['gid'] == gear['id'] %}
+          
+          <img src="{{url_for('static', filename='images/' +  gear['img'] )}}" align="middle" />
+          {% for arg in args %}          
+            {% if arg['gid'] == gear['id'] %}              
               {% if arg['type'] %}
               <div class="about">- {{ arg['content'] }}</div>
               {% else %}
