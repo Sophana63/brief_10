@@ -51,8 +51,8 @@ def gearcreate():
             flash(error)
         else:
             db.execute(
-                'INSERT INTO gear (name, desc)'
-                ' VALUES (?, ?)',
+                'INSERT INTO gear (name, desc, img)'
+                ' VALUES (?, ?, "none")',
                 (name, desc,)
             )
             db.commit()
