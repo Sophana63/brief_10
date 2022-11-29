@@ -38,16 +38,10 @@ def gearindex():
 @login_required
 def gearcreate():
     db = get_db()
-    argcount = db.execute(
-        'SELECT COUNT(*)'
-        ' FROM argument'
-    ).fetchone()
     if request.method == 'POST':
         name = request.form['name']
         desc = request.form['desc']
-        args = []
-        for i in range (argcount[0]):
-            args.append(request.form['arg' + str(i + 1)])
+        args = request.form.getlist('arg')
         error = None
 
         if not name:
@@ -62,6 +56,19 @@ def gearcreate():
                 (name, desc,)
             )
             db.commit()
+            gid = db.execute(
+                'SELECT id'
+                ' FROM gear'
+                ' ORDER BY id DESC'
+                ' LIMIT 1'
+            ).fetchone()
+            for arg in args:
+                db.execute(
+                    'INSERT INTO gear_arg (id_gear, id_arg)'
+                    ' VALUES (?, ?)',
+                    (gid[0], arg,)
+                )
+                db.commit()
             return redirect(url_for('blog.gearindex'))
     argp = db.execute(
         'SELECT id, content'
