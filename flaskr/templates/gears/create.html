@@ -5,29 +5,51 @@
 {% endblock %}
 
 {% block content %}
-  <form method="post" enctype=multipart/form-data>
-    <label for="name">Name</label>
-    <input name="name" id="name" value="{{ request.form['name'] }}" required>
-    <label for="desc">Description</label>
-    <textarea name="desc" id="desc">{{ request.form['desc'] }}</textarea>
+<form method="post" enctype=multipart/form-data>
 
-    <div class="mb-3">
-      <label for="file" class="form-label">Add image</label>
-      <input class="form-control" name="file" type="file" id="file" value="{{request.files['file']}}">
+  <div class="gears-section">
+    <div class="gearCard">
+      <div class="card" style="width: 20rem;">
+        <div class="card-body">
+          <label for="name">Name </label>
+          <input name="name" style="width: 230px;" id="name" value="{{ request.form['name'] }}" required>
+          <label for="desc">Description</label>
+          <textarea name="desc" id="desc" style="width: 290px;">{{ request.form['desc'] }}</textarea>
+        
+          <div class="mb-3">
+            <label for="file" class="form-label">Add image</label>
+            <input class="form-control" name="file" type="file" id="file" value="{{request.files['file']}}">
+          </div>
+        </div>
+      </div>
     </div>
 
-    <label class="form-check-label">Positive arguments:</label>
-    {% for arg in argp %}
-      <div class="about">{{ arg['content'] }}</div>
-      <input type="checkbox" class="form-check-input" id="arg{{ arg['id'] }}"
-        name="arg" value="{{ arg['id'] }}">
-    {% endfor %}
-    <label class="form-check-label">Negative arguments:</label>
-    {% for arg in argn %}
-      <div class="about">{{ arg['content'] }}</div>
-      <input type="checkbox" class="form-check-input" id="arg{{ arg['id'] }}"
-        name="arg" value="{{ arg['id'] }}">
-    {% endfor %}
-    <input type="submit" class="btn btn-primary" value="Save">
-  </form>
+    <div class="gearCard">
+      <div class="card" style="width: 20rem;">
+        <div class="card-body">
+          <h5 class="card-title">Positive arguments :</h5>
+          {% for arg in argp %}
+            <input type="checkbox" class="form-check-input" id="arg{{ arg['id'] }}"
+              name="arg" value="{{ arg['id'] }}"> {{ arg['content'] }}<br>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div class="gearCard">
+      <div class="card" style="width: 20rem;">
+        <div class="card-body">
+          <h5 class="card-title">Negative arguments:</h5>
+          {% for arg in argn %}            
+            <input type="checkbox" class="form-check-input" id="arg{{ arg['id'] }}"
+              name="arg" value="{{ arg['id'] }}"> {{ arg['content'] }}<br>
+          {% endfor %}
+          <br>
+          <input type="submit" class="btn btn-primary" value="Save">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</form>
 {% endblock %}

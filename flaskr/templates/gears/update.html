@@ -5,44 +5,68 @@
 {% endblock %}
 
 {% block content %}
-  <form method="post" enctype=multipart/form-data>
-    <label for="name">Name</label>
-    <input name="name" id="name"
-      value="{{ request.form['name'] or gear['name'] }}" required>
-    <label for="desc">Description</label>
-    <textarea name="desc" id="desc">{{ request.form['desc'] or gear['desc'] }}</textarea>
+<form method="post" enctype=multipart/form-data>
+    <div class="gears-section">
 
-    <div class="mb-3">
-      <label for="file" class="form-label">Change image</label>
-      <input class="form-control" name="file" type="file" id="file" value="{{request.files['file']}}">
-    </div>
+      <div class="gearCard">
+        <div class="card" style="width: 20rem;">
+          <div class="card-body">
+            <label for="name">Name</label>
+            <input name="name" id="name"
+              value="{{ request.form['name'] or gear['name'] }}" required>
+            <label for="desc">Description</label>
+            <textarea name="desc" id="desc">{{ request.form['desc'] or gear['desc'] }}</textarea>
 
-    <label class="form-check-label">Positive arguments:</label>
-    {% for arg in argp %}
-      <div class="about">{{ arg['content'] }}</div>
-      {% if arg['id'] in gargs %}
-        <input type="checkbox" class="form-check-input" id="arg{{ arg['id'] }}"
-          name="arg" value="{{ arg['id'] }}" checked>
-      {% else %}
-        <input type="checkbox" class="form-check-input" id="arg{{ arg['id'] }}"
-          name="arg" value="{{ arg['id'] }}">
-      {% endif %}
-    {% endfor %}
-    <label class="form-check-label">Negative arguments:</label>
-    {% for arg in argn %}
-      <div class="about">{{ arg['content'] }}</div>
-      {% if arg['id'] in gargs %}
-        <input type="checkbox" class="form-check-input" id="arg{{ arg['id'] }}"
-          name="arg" value="{{ arg['id'] }}" checked>
-      {% else %}
-        <input type="checkbox" class="form-check-input" id="arg{{ arg['id'] }}"
-          name="arg" value="{{ arg['id'] }}">
-      {% endif %}
-    {% endfor %}
-    <input type="submit" class="btn btn-primary" value="Save">
-  </form>
-  <hr>
-  <form action="{{ url_for('blog.geardelete', id=gear['id']) }}" method="post">
-    <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
-  </form>
+            <div class="mb-3">
+              <label for="file" class="form-label">Change image</label>
+              <input class="form-control" name="file" type="file" id="file" value="{{request.files['file']}}">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gearCard">
+        <div class="card" style="width: 20rem;">
+          <div class="card-body">
+            <label class="form-check-label">Positive arguments:</label>
+            {% for arg in argp %}
+              <div class="about">{{ arg['content'] }}</div>
+              {% if arg['id'] in gargs %}
+                <input type="checkbox" class="form-check-input" id="arg{{ arg['id'] }}"
+                  name="arg" value="{{ arg['id'] }}" checked>
+              {% else %}
+                <input type="checkbox" class="form-check-input" id="arg{{ arg['id'] }}"
+                  name="arg" value="{{ arg['id'] }}">
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <div class="gearCard">
+        <div class="card" style="width: 20rem;">
+          <div class="card-body">
+            <label class="form-check-label">Negative arguments:</label>
+            {% for arg in argn %}
+              <div class="about">{{ arg['content'] }}</div>
+              {% if arg['id'] in gargs %}
+                <input type="checkbox" class="form-check-input" id="arg{{ arg['id'] }}"
+                  name="arg" value="{{ arg['id'] }}" checked>
+              {% else %}
+                <input type="checkbox" class="form-check-input" id="arg{{ arg['id'] }}"
+                  name="arg" value="{{ arg['id'] }}">
+              {% endif %}
+            {% endfor %}
+            <br>
+            <input type="submit" class="btn btn-primary" value="Save">
+          </div>
+        </div>
+      </div>
+  </div>
+</form>
+    <hr>
+
+<form action="{{ url_for('blog.geardelete', id=gear['id']) }}" method="post">
+  <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">  
+</form>
 {% endblock %}
